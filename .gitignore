@@ -1,0 +1,16 @@
+.idea/
+venv/
+venv*/
+venv1/
+.env
+*.pyc
+media/
+collected_static/
+.virtualenvs
+hyper_files/*
+bower/*
+*.log
+hyper_db_*
+db.sqlite3
+*.orig
+nginx/*

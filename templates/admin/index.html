@@ -1,0 +1,10 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+    <ul class="object-tools">
+        <li>
+            <a style="font-size: 1em !important;" href="{% url 'schema-redoc' %}" class="historylink">API Documentation</a>
+        </li>
+    </ul>
+    {{ block.super }}
+{% endblock %}

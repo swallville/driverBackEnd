@@ -1,0 +1,33 @@
+FROM python:3.7
+MAINTAINER Lukas Ferreira Machado
+
+ENV PYTHONUNBUFFERED 1
+
+# Setup locale settings
+RUN apt-get clean && apt-get update && apt-get install -y locales gdal-bin \
+    libgdal-dev python3-gdal binutils libproj-dev
+RUN locale-gen pt_BR.UTF-8
+RUN dpkg-reconfigure locales
+# Set the locale
+RUN sed -i -e 's/# pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LANG pt_BR.UTF-8
+ENV LANGUAGE pt_BR:pt
+ENV LC_ALL pt_BR.UTF-8
+ENV TZ=America/Sao_Paulo
+
+RUN mkdir /driverBackEnd
+WORKDIR /driverBackEnd
+
+RUN mkdir -p requirements/
+COPY requirements/ /driverBackEnd/requirements/
+RUN pip install -r requirements/requirements_dev.txt
+
+COPY . /driverBackEnd/
+RUN mkdir -p collected_static/
+RUN mkdir -p media/public/
+RUN mkdir -p media/private/
+
+RUN chmod +x run_server.sh
+
+EXPOSE 8000

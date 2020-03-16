@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  db_postgres:
+    container_name: db_postgres
+    restart: always
+    build:
+      context: ../
+      dockerfile: dockerfiles/Dockerfile-postgres
+    expose:
+      - "5432"
+    networks:
+      - postgres_network
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/
+      - LC_ALL=pt_BR.UTF-8
+
+  api:
+    container_name: api
+    restart: always
+    build:
+      context: ../
+      dockerfile: dockerfiles/Dockerfile-dev
+    ports:
+      - "8000:8000"
+    networks:
+      - postgres_network
+    depends_on:
+      - db_postgres
+    volumes:
+      - ../:/driverBackEnd/
+    command: /driverBackEnd/run_server.sh
+
+networks:
+  postgres_network:
+    driver: bridge
+
+volumes:
+  pgdata:
