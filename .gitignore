@@ -3,6 +3,8 @@ venv/
 venv*/
 venv1/
 .env
+.Python
+lib/
 *.pyc
 media/
 collected_static/
