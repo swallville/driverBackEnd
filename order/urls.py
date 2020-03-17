@@ -10,7 +10,7 @@ urlpatterns = [
         name='order_create'),
     url(r'(?P<pk>\d+)/update_retrieve_delete',
         OrderUpdateRetrieveDeleteView.as_view({'put': 'update', 'get': 'retrieve', 'delete': 'destroy'}),
-        name='order_update_retrieve'),
+        name='order_update_retrieve_delete'),
     url(r'list/byDriver',
         OrderListByDriverView.as_view({'get': 'list'}),
         name='order_list_by_driver'),

@@ -14,7 +14,7 @@ class LocationTests(APITestCase):
                 "longitude": -48.06286811159569
             },
             'address': 'Somewhere over the rainbow',
-            'zip_code': '71930250',
+            'zip_code': '72130130',
             'city': 'Brasilia'}
 
     def test_location_create(self):
