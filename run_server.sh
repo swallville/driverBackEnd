@@ -5,6 +5,7 @@ set -e
 function manage_app () {
     python manage.py collectstatic --noinput
     python manage.py migrate
+    # gunicorn driverBackEnd.wsgi -b 0.0.0.0:8000
 }
 
 function start_development() {
